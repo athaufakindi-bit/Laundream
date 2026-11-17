@@ -84,12 +84,49 @@ void inputDataTransaksi(string &nama, int &pilihLayanan, int &pilihParfum, doubl
     cout << "========================================================\n";
 
     // --- [TULIS KODE FUNGSI DIENAN DI BAWAH INI] ---
-    cout << "[KOSONG] TODO: Implementasikan input nama, layanan, dan berat oleh Dienan.\n";
-    nama = "Contoh Pelanggan";
-    pilihLayanan = 1;
-    pilihParfum = 1;
-    berat = 1.0;
-    (void)layanan; (void)tarif; (void)parfum;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Nama pelanggan: ";
+    getline(cin, nama);
+
+    while (nama.empty()) {
+        cout << "Nama tidak boleh kosong. Masukkan nama pelanggan: ";
+        getline(cin, nama);
+    }
+
+    cout << "\nPilihan paket layanan:\n";
+    for (size_t i = 0; i < layanan.size(); ++i) {
+        cout << i + 1 << ". " << layanan[i] << " - Rp" << tarif[i] << "/kg\n";
+    }
+
+    cout << "Pilih layanan (1-" << layanan.size() << "): ";
+    while (!(cin >> pilihLayanan) || pilihLayanan < 1 ||
+           pilihLayanan > static_cast<int>(layanan.size())) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "[!] Pilihan layanan tidak valid. Pilih (1-"
+             << layanan.size() << "): ";
+    }
+
+    cout << "\nPilihan parfum:\n";
+    for (size_t i = 0; i < parfum.size(); ++i) {
+        cout << i + 1 << ". " << parfum[i] << "\n";
+    }
+
+    cout << "Pilih parfum (1-" << parfum.size() << "): ";
+    while (!(cin >> pilihParfum) || pilihParfum < 1 ||
+           pilihParfum > static_cast<int>(parfum.size())) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "[!] Pilihan parfum tidak valid. Pilih (1-"
+             << parfum.size() << "): ";
+    }
+
+    cout << "Berat pakaian (kg): ";
+    while (!(cin >> berat) || berat <= 0) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "[!] Berat harus lebih dari 0 kg. Masukkan ulang: ";
+    }
     // --- [SELESAI FUNGSI DIENAN] ---
 }
 
