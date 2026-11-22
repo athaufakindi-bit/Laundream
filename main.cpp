@@ -187,14 +187,24 @@ void cetakStrukKasir(const string &nama, const string &layanan, const string &pa
     cout << "========================================================\n";
 
     // --- [TULIS KODE DESAIN STRUK DI SINI] ---
-    cout << "[KOSONG] TODO: Desain tampilan struk kasir oleh Fakhry.\n";
-    (void)nama; (void)layanan; (void)parfum; (void)berat; (void)tarifPerKg;
-    (void)subtotal; (void)diskon; (void)totalBayar; (void)uangBayar; (void)kembalian;
+    cout << "Nama Pelanggan : " << nama << "\n";
+    cout << "Paket Layanan  : " << layanan << "\n";
+    cout << "Jenis Parfum   : " << parfum << "\n";
+    cout << "Berat Cucian   : " << berat << " kg\n";
+    cout << "Tarif per Kg   : Rp " << tarifPerKg << "\n";
+    cout << "--------------------------------------------------------\n";
+    cout << "Subtotal       : Rp " << static_cast<int>(subtotal) << "\n";
+    cout << "Diskon (10%)   : -Rp " << static_cast<int>(diskon) << "\n";
+    cout << "--------------------------------------------------------\n";
+    cout << "TOTAL BAYAR    : Rp " << totalBayar << "\n";
+    cout << "Uang Diterima  : Rp " << uangBayar << "\n";
+    cout << "Uang Kembalian : Rp " << kembalian << "\n";
+    cout << "--------------------------------------------------------\n";
+    cout << "    Terima kasih telah mempercayakan cucian Anda!       \n";
     // --- [SELESAI STRUK] ---
 
     cout << "========================================================\n";
 }
-
 
 // ============================================================================
 // 4B. MODUL PENCARIAN TRANSAKSI (MENGGUNAKAN find() & distance() DARI <algorithm>)
@@ -222,9 +232,36 @@ void cariTransaksiPelanggan(const vector<string> &riwayatNama,
     cout << "========================================================\n";
 
     // --- [TULIS KODE PENCARIAN DENGAN find() DI SINI] ---
-    cout << "[KOSONG] TODO: Implementasikan pencarian dengan find() oleh Fakhry.\n";
-    (void)riwayatNama; (void)riwayatLayanan; (void)riwayatParfum; (void)riwayatBerat;
-    (void)riwayatTotalBayar; (void)riwayatUangBayar; (void)riwayatKembalian;
+    if (riwayatNama.empty()) {
+        cout << "[!] Belum ada riwayat transaksi yang tersimpan.\n";
+        cout << "========================================================\n";
+        return;
+    }
+
+    string cariNama;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Masukkan nama pelanggan yang dicari: ";
+    getline(cin, cariNama);
+
+    auto it = find(riwayatNama.begin(), riwayatNama.end(), cariNama);
+
+    if (it != riwayatNama.end()) {
+        int idx = distance(riwayatNama.begin(), it);
+
+        cout << "\n[+] Data transaksi ditemukan!\n";
+        cout << "--------------------------------------------------------\n";
+        cout << "Nama Pelanggan : " << riwayatNama[idx] << "\n";
+        cout << "Paket Layanan  : " << riwayatLayanan[idx] << "\n";
+        cout << "Jenis Parfum   : " << riwayatParfum[idx] << "\n";
+        cout << "Berat Cucian   : " << riwayatBerat[idx] << " kg\n";
+        cout << "Total Bayar    : Rp " << riwayatTotalBayar[idx] << "\n";
+        cout << "Uang Diterima  : Rp " << riwayatUangBayar[idx] << "\n";
+        cout << "Uang Kembalian : Rp " << riwayatKembalian[idx] << "\n";
+        cout << "--------------------------------------------------------\n";
+    } else {
+        cout << "\n[!] Transaksi atas nama \"" << cariNama << "\" tidak ditemukan.\n";
+    }
+    cout << "========================================================\n";
     // --- [SELESAI PENCARIAN] ---
 }
 
